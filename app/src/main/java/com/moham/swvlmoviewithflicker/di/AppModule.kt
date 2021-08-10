@@ -25,7 +25,22 @@ import javax.inject.Singleton
 object AppModule {
 
 
-   
+    @Singleton
+    @Provides
+    fun provideContext(application: Application): Context = application.applicationContext
+
+    @Singleton
+    @Provides
+    fun provideCacheInterceptor():Interceptor {
+        return Interceptor { chain ->
+            var request = chain.request()
+            request = request
+                .newBuilder()
+                .header("Cache-Control", "public, max-age=" + 60)
+                .build()
+             chain.proceed(request)
+        }
+    }
 
     @Singleton
     @Provides
