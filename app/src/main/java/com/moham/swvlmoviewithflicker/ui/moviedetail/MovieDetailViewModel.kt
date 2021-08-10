@@ -14,14 +14,14 @@ import javax.inject.Inject
 class MovieDetailViewModel @Inject constructor(private val repository: MovieRepository) :
     ViewModel() {
 
-    private val params = MutableLiveData<Map<String, String>>()
+    private val params = MutableLiveData<String>()
 
     private val movie = params.switchMap { id ->
         repository.getFlickrPhotoData(id)
     }
     val movieLiveData: LiveData<Resource<FlickrPhoto>> = movie
 
-    fun start(params: Map<String, String>) {
+    fun getPhotos(params: String) {
         this.params.value = params
     }
 

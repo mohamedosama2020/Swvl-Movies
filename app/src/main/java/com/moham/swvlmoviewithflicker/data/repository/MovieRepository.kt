@@ -9,7 +9,7 @@ class MovieRepository @Inject constructor(
 ) {
 
 
-    fun getFlickrPhotoData(params: Map<String, String>) =
+    fun getFlickrPhotoData(params: String) =
         performGetOperation(networkCall = { remoteDataSource.getFlickrPhotoData(params) })
 
 

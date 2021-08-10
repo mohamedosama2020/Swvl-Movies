@@ -49,14 +49,7 @@ class MovieDetailFragment : Fragment() {
 
 
     private fun setupObservers(movie: Movie) {
-        val params = HashMap<String, String>()
-        params["api_key"] = BuildConfig.FLICKER_KEY
-        params["text"] = movie.title!!
-        params["page"] = 1.toString()
-        params["per_page"] = 10.toString()
-
-
-        viewModel.start(params)
+        viewModel.getPhotos(movie.title.toString())
         viewModel.movieLiveData.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
