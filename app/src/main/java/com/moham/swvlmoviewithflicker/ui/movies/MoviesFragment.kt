@@ -40,6 +40,7 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         setupRecyclerView()
         loadLocalData()
         setUpSearchResult()
+
     }
 
 
