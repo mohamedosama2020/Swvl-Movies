@@ -30,7 +30,6 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = MoviesFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,7 +42,6 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
 
     }
 
-
     private fun setupRecyclerView() {
         adapter = MoviesAdapter(this)
         binding.moviesRv.layoutManager = LinearLayoutManager(requireContext())
@@ -54,15 +52,11 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         viewModel.searchQuery.observe(viewLifecycleOwner, {
             search(it)
         })
-
     }
 
-
     private fun loadLocalData() {
-        val dataString = context?.let { loadJSONFromAsset(it, "movies.json") }
-        val data: MoviesDetail = Gson().fromJson(dataString, MoviesDetail::class.java)
-        val sortedMoviesByYear = data.movies?.sorted()
-        adapter.setItems(sortedMoviesByYear)
+        val data = viewModel.loadMoviesList()
+        adapter.setItems(data.movies)
     }
 
     override fun onClickedMovie(movie: Movie) {
