@@ -1,11 +1,9 @@
 package com.moham.swvlmoviewithflicker.ui.movies
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.moham.swvlmoviewithflicker.R
 import com.moham.swvlmoviewithflicker.data.entities.movies.Movie
 import com.moham.swvlmoviewithflicker.databinding.ItemMovieBinding
 import com.moham.swvlmoviewithflicker.databinding.MovieHeaderBinding
