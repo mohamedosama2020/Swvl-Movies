@@ -6,14 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.moviedetail.MovieDetailFragment">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        tools:visibility="gone" />
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -26,7 +18,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
             <TextView
                 android:id="@+id/title"
                 android:layout_width="0dp"
@@ -37,7 +28,7 @@
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_18ssp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/ratingAndYear"
+                app:layout_constraintBottom_toTopOf="@id/tvRating"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -45,17 +36,52 @@
                 tools:text="@string/dummy_movie_title" />
 
             <TextView
-                android:id="@+id/ratingAndYear"
-                android:layout_width="0dp"
+                android:id="@+id/tvRating"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:layout_marginEnd="@dimen/_16sdp"
-                android:text="@string/rating_year"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/rating"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/title"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
+
+            <RatingBar
+                android:id="@+id/rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rating_year"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvRating"
+                app:layout_constraintStart_toEndOf="@+id/tvRating"
+                app:layout_constraintTop_toTopOf="@+id/tvRating" />
+
+            <TextView
+                android:id="@+id/tvYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="@string/year"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12ssp"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+
+            <TextView
+                android:id="@+id/tvYearValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/year"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/_12ssp"
+                tools:text="2010"
+                android:layout_marginStart="@dimen/_4sdp"
+                app:layout_constraintStart_toEndOf="@id/tvYear"
+                app:layout_constraintTop_toBottomOf="@+id/tvRating" />
 
             <TextView
                 android:id="@+id/cast_heading"
@@ -65,15 +91,15 @@
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:text="@string/cast"
+                android:visibility="gone"
+                tools:visibility="visible"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_18ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/casts"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingAndYear"
-
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/tvYearValue" />
 
             <TextView
                 android:id="@+id/casts"
@@ -83,12 +109,12 @@
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12ssp"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/genres_heading"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cast_heading"
-
-                />
+                app:layout_constraintTop_toBottomOf="@+id/cast_heading" />
 
             <TextView
                 android:id="@+id/genres_heading"
@@ -97,15 +123,15 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:text="@string/genres"
+                android:visibility="gone"
+                tools:visibility="visible"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_18ssp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/genres"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/casts"
-
-                />
+                app:layout_constraintTop_toBottomOf="@+id/casts" />
 
             <TextView
                 android:id="@+id/genres"
@@ -115,6 +141,8 @@
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:textColor="@android:color/black"
                 android:textSize="@dimen/_12ssp"
+                android:visibility="gone"
+                tools:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@id/movie_pictures"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -123,18 +151,25 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movie_pictures"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/_300sdp"
                 android:scrollbarSize="@dimen/_2sdp"
                 android:scrollbars="vertical"
-
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/genres"
+                app:layout_constraintTop_toBottomOf="@+id/genres" />
 
-                />
-
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                app:layout_constraintBottom_toBottomOf="@+id/movie_pictures"
+                app:layout_constraintEnd_toEndOf="@+id/movie_pictures"
+                app:layout_constraintStart_toStartOf="@+id/movie_pictures"
+                app:layout_constraintTop_toTopOf="@+id/movie_pictures"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

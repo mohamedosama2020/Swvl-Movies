@@ -14,9 +14,9 @@ class MoviesAdapter(private val listener: MovieItemListener) :
     private val moviesList = ArrayList<Movie>()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: List<Movie>?) {
-        this.moviesList.clear()
-        items?.let { this.moviesList.addAll(it) }
+    fun setItems(items: List<Movie>) {
+        moviesList.clear()
+        moviesList.addAll(items)
         notifyDataSetChanged()
     }
 

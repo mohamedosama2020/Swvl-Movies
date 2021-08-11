@@ -26,7 +26,7 @@ class MovieDetailFragment : Fragment() {
 
     private var binding: MovieDetailFragmentBinding by autoCleared()
     private val viewModel: MovieDetailViewModel by viewModels()
-    private var noPictureToast: Toast? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,54 +42,47 @@ class MovieDetailFragment : Fragment() {
         val movie =
             arguments?.getParcelable<Movie>("selected_movie")
         movie?.let {
+            bindMovieDetails(movie)
             setupObservers(it)
         }
     }
-
 
     private fun setupObservers(movie: Movie) {
         viewModel.getPhotos(movie.title)
         viewModel.movieLiveData.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    handleSuccessResponse(it,movie)
+                    handleSuccessResponse(it)
                 }
-
                 Resource.Status.ERROR -> {
                     Toast.makeText(activity, it.message, LENGTH_LONG).show()
                     binding.progressBar.visibility = GONE
-                    binding.movieCl.visibility = GONE
                 }
-
                 Resource.Status.LOADING -> {
                     binding.progressBar.visibility = VISIBLE
-                    binding.movieCl.visibility = GONE
                 }
             }
         })
     }
 
-    private fun handleSuccessResponse(resource: Resource<FlickrPhoto>, movie: Movie) {
-        bindMovieDetails(movie)
+    private fun handleSuccessResponse(resource: Resource<FlickrPhoto>) {
         checkIfNoPhotos(resource)
         binding.progressBar.visibility = GONE
-        binding.movieCl.visibility = VISIBLE
     }
 
     private fun checkIfNoPhotos(resource: Resource<FlickrPhoto>) {
         if (resource.data?.photos?.photo?.size!! > 0) {
             setupImageRecyclerView(resource.data.photos?.photo)
         } else {
-            noPictureToast =
-                Toast.makeText(context, "No Picture found on Flickr", LENGTH_LONG)
-            noPictureToast?.show()
+            Toast.makeText(context, "No Picture found on Flickr", LENGTH_LONG).show()
         }
     }
 
     private fun bindMovieDetails(movie: Movie) {
 
         binding.title.text = getString(R.string.movie_name, movie.title)
-        binding.ratingAndYear.text = getString(R.string.rating_year, movie.rating, movie.year)
+        binding.rating.rating = movie.rating.toFloat()
+        binding.tvYearValue.text = movie.year.toString()
 
         if (movie.genres.isNotEmpty()) {
             binding.genresHeading.visibility = VISIBLE
@@ -97,10 +90,6 @@ class MovieDetailFragment : Fragment() {
             movie.genres.forEach {
                 binding.genres.append(it.plus("\n"))
             }
-
-        } else {
-            binding.genresHeading.visibility = GONE
-            binding.genres.visibility = GONE
         }
 
         if (movie.cast.isNotEmpty()) {
@@ -109,26 +98,14 @@ class MovieDetailFragment : Fragment() {
             movie.cast.forEach {
                 binding.casts.append(it.plus("\n"))
             }
-
-        } else {
-            binding.castHeading.visibility = GONE
-            binding.casts.visibility = GONE
         }
-
-
     }
 
     private fun setupImageRecyclerView(photos: List<Photo>?) {
         val adapter = MoviePicturesAdapter()
-
         binding.moviePictures.layoutManager = GridLayoutManager(context, 2)
         binding.moviePictures.adapter = adapter
         adapter.setItems(photos)
-    }
-
-    override fun onDestroy() {
-        noPictureToast?.cancel()
-        super.onDestroy()
     }
 
 }

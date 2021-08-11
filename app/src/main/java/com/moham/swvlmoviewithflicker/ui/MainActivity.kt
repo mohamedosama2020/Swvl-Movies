@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         binding.toolbar.setupWithNavController(navController, appBarConfiguration)
 
-
         listener = NavController.OnDestinationChangedListener { _, destination, _ ->
             if (getString(R.string.movie_detail) == destination.label) {
                 binding.toolbar.menu.clear()
@@ -45,9 +44,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         navController.addOnDestinationChangedListener(listener)
-
-
-
     }
 
     private fun setSearchBar(binding: ActivityMainBinding) {
@@ -65,11 +61,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-
     override fun onDestroy() {
         navController.removeOnDestinationChangedListener(listener)
         super.onDestroy()
     }
-
 
 }
