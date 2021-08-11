@@ -9,9 +9,7 @@ class GetFilteredMoviesUseCase @Inject constructor() {
 
     operator fun invoke(searchQuery: String, movies: List<Movie>): List<GroupedMovies> {
         //Get Movies By Title
-        val searchedMovie = movies.filter {
-            it.title?.lowercase()?.contains(searchQuery.lowercase()) == true
-        }
+        val searchedMovie = movies.filter { it.title.lowercase().contains(searchQuery.lowercase()) }
         //Group Searched Movies By Year
         val searchedMoviesGroupedByYear = searchedMovie.groupBy { it.year }
         //Map Grouped Movies To New Model (Grouped Movies)
