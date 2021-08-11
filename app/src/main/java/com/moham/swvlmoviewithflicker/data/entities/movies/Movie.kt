@@ -3,13 +3,15 @@ package com.moham.swvlmoviewithflicker.data.entities.movies
 import android.os.Parcel
 import android.os.Parcelable
 
-class Movie() : Parcelable, Comparable<Movie> {
+data class Movie(
+    var title: String? = null,
+    var year: Int? = null,
+    var cast: List<String>? = null,
+    var genres: List<String>? = null,
+    var rating: Int? = null,
+) : Parcelable, Comparable<Movie> {
 
-    var title: String? = null
-    var year: Int? = null
-    var cast: List<String>? = null
-    var genres: List<String>? = null
-    var rating: Int? = null
+
 
     constructor(parcel: Parcel) : this() {
         title = parcel.readString()

@@ -83,6 +83,10 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
+    //Recycler View Section Adapter library
+    implementation 'com.github.luizgrp:SectionedRecyclerViewAdapter:v3.2.0'
+
+
     //SDP & SSP dependencies powered by intuit
     def SDP = "1.0.6"
     implementation "com.intuit.sdp:sdp-android:$SDP"

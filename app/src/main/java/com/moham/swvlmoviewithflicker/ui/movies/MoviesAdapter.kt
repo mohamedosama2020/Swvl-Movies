@@ -4,28 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.moham.swvlmoviewithflicker.R
 import com.moham.swvlmoviewithflicker.data.entities.movies.Movie
 import com.moham.swvlmoviewithflicker.databinding.ItemMovieBinding
+import com.moham.swvlmoviewithflicker.databinding.MovieHeaderBinding
 
 class MoviesAdapter(private val listener: MovieItemListener) :
-    RecyclerView.Adapter<MovieViewHolder>(), Filterable {
+    RecyclerView.Adapter<MovieViewHolder>() {
 
-
-    private val searchableList = ArrayList<Movie>()
-    private val originalList = ArrayList(searchableList)
-    private var onNothingFound: (() -> Unit)? = null
+    private val moviesList = ArrayList<Movie>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItems(items: List<Movie>?) {
-        this.searchableList.clear()
-        items?.let {
-            this.searchableList.addAll(it)
-            originalList.addAll(it)
-        }
+        this.moviesList.clear()
+        items?.let { this.moviesList.addAll(it) }
         notifyDataSetChanged()
     }
 
@@ -35,56 +28,23 @@ class MoviesAdapter(private val listener: MovieItemListener) :
         return MovieViewHolder(binding, parent.context)
     }
 
-    override fun getItemCount(): Int = searchableList.size
+    override fun getItemCount(): Int = moviesList.size
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.bind(searchableList[position])
+        holder.bind(moviesList[position])
 
         holder.itemView.setOnClickListener {
-            listener.onClickedMovie(searchableList[position])
+            listener.onClickedMovie(moviesList[position])
         }
     }
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            private val filterResults = FilterResults()
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charString = constraint.toString()
-                searchableList.clear()
-                if (constraint.isNullOrBlank()) {
-                    searchableList.addAll(originalList)
-                } else {
-                    val searchResults =
-                        originalList.filter {
-                            it.title?.lowercase()?.contains(charString.lowercase())!!
-                        }
-                    searchableList.addAll(searchResults)
-                }
-                return filterResults.also {
-                    it.values = searchableList
-                }
-            }
-
-            @SuppressLint("NotifyDataSetChanged")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                // no need to use "results" filtered list provided by this method.
-                if (searchableList.isNullOrEmpty())
-                    onNothingFound?.invoke()
-                notifyDataSetChanged()
-            }
-        }
+    fun getOriginalMoviesList(): List<Movie> {
+        return moviesList
     }
-
 
     interface MovieItemListener {
         fun onClickedMovie(movie: Movie)
     }
-
-    fun search(s: String?, onNothingFound: (() -> Unit)?) {
-        this.onNothingFound = onNothingFound
-        filter.filter(s)
-    }
-
 
 }
 
@@ -100,9 +60,16 @@ class MovieViewHolder(
         itemBinding.title.text = item.title
         itemBinding.ratingAndYear.text =
             context.getString(R.string.rating_year, item.rating, item.year)
-
     }
-
-
 }
+
+class HeaderViewHolder(
+    private val itemBinding: MovieHeaderBinding,
+) : RecyclerView.ViewHolder(itemBinding.root) {
+
+    fun bind(year:String) {
+        itemBinding.tvTitle.text = year
+    }
+}
+
 

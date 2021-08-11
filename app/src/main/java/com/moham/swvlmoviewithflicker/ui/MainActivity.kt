@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-
                 moviesViewModel.setSearchQuery(newText)
                 return true
             }

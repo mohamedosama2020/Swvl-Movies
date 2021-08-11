@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.moham.swvlmoviewithflicker.data.remote.MovieRemoteDataSource
 import com.moham.swvlmoviewithflicker.data.remote.MovieService
+import com.moham.swvlmoviewithflicker.domain.GetFilteredMoviesUseCase
 import com.moham.swvlmoviewithflicker.domain.GetMoviesUseCase
 import dagger.Module
 import dagger.Provides
@@ -28,4 +29,8 @@ object UseCasesModule {
     @Singleton
     @Provides
     fun provideMoviesUseCase(context: Context): GetMoviesUseCase = GetMoviesUseCase(context)
+
+    @Singleton
+    @Provides
+    fun provideFilteredMoviesUseCase(): GetFilteredMoviesUseCase = GetFilteredMoviesUseCase()
 }
