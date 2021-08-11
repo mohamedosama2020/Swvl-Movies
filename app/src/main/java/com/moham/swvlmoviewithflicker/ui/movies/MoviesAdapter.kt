@@ -25,7 +25,7 @@ class MoviesAdapter(private val listener: MovieItemListener) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val binding: ItemMovieBinding =
             ItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MovieViewHolder(binding, parent.context)
+        return MovieViewHolder(binding)
     }
 
     override fun getItemCount(): Int = moviesList.size
@@ -50,7 +50,6 @@ class MoviesAdapter(private val listener: MovieItemListener) :
 
 class MovieViewHolder(
     private val itemBinding: ItemMovieBinding,
-    private val context: Context
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 
     private lateinit var movie: Movie
@@ -58,8 +57,8 @@ class MovieViewHolder(
     fun bind(item: Movie) {
         this.movie = item
         itemBinding.title.text = item.title
-        itemBinding.ratingAndYear.text =
-            context.getString(R.string.rating_year, item.rating, item.year)
+        itemBinding.rating.rating = item.rating.toFloat()
+        itemBinding.tvYearValue.text = item.year.toString()
     }
 }
 
@@ -67,7 +66,7 @@ class HeaderViewHolder(
     private val itemBinding: MovieHeaderBinding,
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 
-    fun bind(year:String) {
+    fun bind(year: String) {
         itemBinding.tvTitle.text = year
     }
 }

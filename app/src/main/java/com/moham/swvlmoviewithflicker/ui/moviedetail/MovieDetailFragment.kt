@@ -11,7 +11,6 @@ import android.widget.Toast.LENGTH_LONG
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.moham.swvlmoviewithflicker.BuildConfig
 import com.moham.swvlmoviewithflicker.R
 import com.moham.swvlmoviewithflicker.data.entities.flickrPhoto.FlickrPhoto
 import com.moham.swvlmoviewithflicker.data.entities.flickrPhoto.Photo
@@ -49,7 +48,7 @@ class MovieDetailFragment : Fragment() {
 
 
     private fun setupObservers(movie: Movie) {
-        viewModel.getPhotos(movie.title.toString())
+        viewModel.getPhotos(movie.title)
         viewModel.movieLiveData.observe(viewLifecycleOwner, {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
@@ -92,10 +91,10 @@ class MovieDetailFragment : Fragment() {
         binding.title.text = getString(R.string.movie_name, movie.title)
         binding.ratingAndYear.text = getString(R.string.rating_year, movie.rating, movie.year)
 
-        if (movie.genres?.size!! > 0) {
+        if (movie.genres.isNotEmpty()) {
             binding.genresHeading.visibility = VISIBLE
             binding.genres.visibility = VISIBLE
-            movie.genres?.forEach {
+            movie.genres.forEach {
                 binding.genres.append(it.plus("\n"))
             }
 
@@ -104,10 +103,10 @@ class MovieDetailFragment : Fragment() {
             binding.genres.visibility = GONE
         }
 
-        if (movie.cast?.size!! > 0) {
+        if (movie.cast.isNotEmpty()) {
             binding.castHeading.visibility = VISIBLE
             binding.casts.visibility = VISIBLE
-            movie.cast?.forEach {
+            movie.cast.forEach {
                 binding.casts.append(it.plus("\n"))
             }
 

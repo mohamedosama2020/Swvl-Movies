@@ -26,7 +26,7 @@ class MovieSection(
 
     override fun getItemViewHolder(view: View?): RecyclerView.ViewHolder {
         val binding: ItemMovieBinding = ItemMovieBinding.inflate(LayoutInflater.from(view?.context))
-        return MovieViewHolder(binding, view?.context!!)
+        return MovieViewHolder(binding)
     }
 
     override fun onBindItemViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginVertical="@dimen/_4sdp"
     android:layout_marginHorizontal="@dimen/_8sdp"
     android:foreground="?attr/selectableItemBackgroundBorderless"
@@ -35,22 +35,60 @@
             android:textColor="@android:color/black"
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/ratingAndYear"
+            tools:text="Movie Name 1"
+            app:layout_constraintBottom_toTopOf="@id/tvRating"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/ratingAndYear"
-            android:layout_width="0dp"
+            android:id="@+id/tvRating"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/rating_year"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="@string/rating"
             android:textColor="@android:color/black"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rating_year"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRating"
+            app:layout_constraintStart_toEndOf="@+id/tvRating"
+            app:layout_constraintTop_toTopOf="@+id/tvRating" />
+
+        <TextView
+            android:id="@+id/tvYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/year"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+
+        <TextView
+            android:id="@+id/tvYearValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/year"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/_12ssp"
+            tools:text="2010"
+            android:layout_marginStart="@dimen/_4sdp"
+            app:layout_constraintStart_toEndOf="@id/tvYear"
+            app:layout_constraintTop_toBottomOf="@+id/tvRating" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
