@@ -7,7 +7,7 @@ import com.moham.swvlmoviewithflicker.utils.loadJSONFromAsset
 import javax.inject.Inject
 
 
-class GetMoviesUseCase @Inject constructor(val context: Context) {
+class GetMoviesUseCase @Inject constructor(private val context: Context) {
 
     private lateinit var moviesDetail:MoviesDetail
 

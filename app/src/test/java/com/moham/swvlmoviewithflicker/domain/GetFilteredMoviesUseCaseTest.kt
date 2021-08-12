@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Assertions
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
-import kotlin.random.Random
 
 @RunWith(RobolectricTestRunner::class)
 @Config(maxSdk = 30, minSdk = 24)

@@ -6,18 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import com.moham.swvlmoviewithflicker.data.entities.flickrPhoto.FlickrPhoto
 import com.moham.swvlmoviewithflicker.data.repository.MovieRepository
+import com.moham.swvlmoviewithflicker.domain.GetPhotosUseCase
 import com.moham.swvlmoviewithflicker.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailViewModel @Inject constructor(private val repository: MovieRepository) :
+class MovieDetailViewModel @Inject constructor(private val getPhotosUseCase: GetPhotosUseCase) :
     ViewModel() {
 
     private val params = MutableLiveData<String>()
 
     private val movie = params.switchMap { id ->
-        repository.getFlickrPhotoData(id)
+        getPhotosUseCase(id)
     }
     val movieLiveData: LiveData<Resource<FlickrPhoto>> = movie
 
