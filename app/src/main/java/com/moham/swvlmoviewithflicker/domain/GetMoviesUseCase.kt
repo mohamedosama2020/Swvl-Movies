@@ -1,13 +1,9 @@
 package com.moham.swvlmoviewithflicker.domain
 
 import android.content.Context
-import com.moham.swvlmoviewithflicker.data.entities.movies.MoviesDetail
 import com.google.gson.Gson
-import com.moham.swvlmoviewithflicker.data.entities.movies.Movie
+import com.moham.swvlmoviewithflicker.data.entities.movies.MoviesDetail
 import com.moham.swvlmoviewithflicker.utils.loadJSONFromAsset
-import java.io.FileNotFoundException
-import java.lang.Exception
-import java.lang.NullPointerException
 import javax.inject.Inject
 
 

@@ -1,8 +1,7 @@
-package com.example.movies.utils
+package com.moham.swvlmoviewithflicker.utils
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
-import com.moham.swvlmoviewithflicker.utils.Resource
 import com.moham.swvlmoviewithflicker.utils.Resource.Status.*
 import kotlinx.coroutines.Dispatchers
 

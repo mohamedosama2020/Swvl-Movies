@@ -2,7 +2,6 @@ package com.moham.swvlmoviewithflicker.utils
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -13,7 +12,6 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.moham.swvlmoviewithflicker.R
 import com.moham.swvlmoviewithflicker.data.entities.flickrPhoto.Photo
-import java.io.IOException
 import java.nio.charset.StandardCharsets
 
 fun loadJSONFromAsset(context: Context, fileName: String?): String? {
