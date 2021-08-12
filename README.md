@@ -10,6 +10,8 @@ I would like you to showcase those movies and the signature they left behind.
 * The current architecture is MVVM with Use case and Repository plus remote date source
 * The app is using Dagger-Hilt dependency injectin.
 * The app is unit tested (Use Cases) with Junit and Robolectric
+* The app us using Response Caching Mechanism With OkHttp
+* Photos in the app is cached via Glide Library
 
 ## Libraries
 
