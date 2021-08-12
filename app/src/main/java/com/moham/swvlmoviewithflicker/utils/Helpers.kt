@@ -28,12 +28,13 @@ fun loadJSONFromAsset(context: Context, fileName: String?): String? {
 }
 
 fun getFlickrImageURL(context: Context, photo: Photo): String =
-    context.getString(R.string.image_url, photo.server, photo.id, photo.secret)
+    context.getString(R.string.image_url, photo.farm,photo.server, photo.id, photo.secret)
 
 
 fun loadImage(context: Context,photo: Photo,imageView:ImageView,onPhotoLoaded:()->Unit){
+    val url = getFlickrImageURL(context, photo)
     Glide.with(context)
-        .load(getFlickrImageURL(context, photo))
+        .load(url)
         .listener(object : RequestListener<Drawable?> {
             override fun onLoadFailed(
                 e: GlideException?,

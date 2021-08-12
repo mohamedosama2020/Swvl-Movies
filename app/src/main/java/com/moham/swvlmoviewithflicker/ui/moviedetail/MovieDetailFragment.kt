@@ -72,7 +72,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun checkIfNoPhotos(resource: Resource<FlickrPhoto>) {
         if (resource.data?.photos?.photo?.size!! > 0) {
-            setupImageRecyclerView(resource.data.photos?.photo)
+            setupImageRecyclerView(resource.data.photos.photo)
         } else {
             Toast.makeText(context, "No Picture found on Flickr", LENGTH_LONG).show()
         }

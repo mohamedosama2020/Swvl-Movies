@@ -5,7 +5,7 @@ class Photo {
     var owner: String? = null
     var secret: String? = null
     var server: String? = null
-    var farm: Int? = null
+    var farm: String? = null
     var title: String? = null
     var ispublic: Int? = null
     var isfriend: Int? = null

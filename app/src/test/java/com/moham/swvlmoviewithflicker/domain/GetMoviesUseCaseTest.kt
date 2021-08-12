@@ -25,12 +25,12 @@ class GetMoviesUseCaseTest : TestCase() {
     @Test
     fun `test_getMoviesUseCase_with valid json name_then return not empty movie value`() {
         val movieDetail = getMoviesUseCase.invoke(jsonFile = "movies.json")
-        assertTrue(movieDetail.movies.isNotEmpty(),"There is Movies")
+        assertTrue(movieDetail.movies.isNotEmpty(),"Must Return Not Empty Movies")
     }
 
     @Test
     fun `test_getMoviesUseCase_with wrong json name_then return empty movies value`() {
         val movieDetail = getMoviesUseCase.invoke(jsonFile = "moviees.json")
-        assertTrue(movieDetail.movies.isEmpty(),"There is No Movies")
+        assertTrue(movieDetail.movies.isEmpty(),"Must Return Empty Movies")
     }
 }
