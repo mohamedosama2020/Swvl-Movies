@@ -22,6 +22,12 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+
     viewBinding {
         enabled = true
     }
@@ -96,7 +102,11 @@ dependencies {
     //Test Libs
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.google.truth:truth:1.1.2'
+    testImplementation 'org.robolectric:robolectric:4.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.2.0'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0'
+    testImplementation 'androidx.test:core:1.4.0'
+    testImplementation 'org.junit.platform:junit-platform-commons:1.5.2'
 
     androidTestImplementation 'com.google.truth:truth:1.1.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

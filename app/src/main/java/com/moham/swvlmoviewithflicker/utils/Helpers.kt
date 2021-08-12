@@ -17,17 +17,16 @@ import java.io.IOException
 import java.nio.charset.StandardCharsets
 
 fun loadJSONFromAsset(context: Context, fileName: String?): String? {
-    try {
+    return try {
         val inputStream = context.assets.open(fileName!!)
         val size = inputStream.available()
         val buffer = ByteArray(size)
         inputStream.read(buffer)
         inputStream.close()
-        return String(buffer, StandardCharsets.UTF_8)
-    } catch (ex: IOException) {
-        ex.printStackTrace()
+        String(buffer, StandardCharsets.UTF_8)
+    } catch (ex: Exception) {
+        null
     }
-    return null
 }
 
 fun getFlickrImageURL(context: Context, photo: Photo): String =
