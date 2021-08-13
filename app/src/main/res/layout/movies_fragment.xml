@@ -27,6 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:gravity="center"
             android:textSize="@dimen/_16ssp"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:textAlignment="center"
             android:text="@string/no_movies_matches_your_search"
             app:layout_constraintStart_toStartOf="parent"
