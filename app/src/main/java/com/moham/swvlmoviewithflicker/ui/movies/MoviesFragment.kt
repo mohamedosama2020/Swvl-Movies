@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -64,15 +65,24 @@ class MoviesFragment : Fragment(), MoviesAdapter.MovieItemListener {
         )
     }
 
-    private fun search(s: String) {
-        if (s.isBlank())
+    private fun search(searchQuery: String) {
+        if (searchQuery.isBlank()){
             binding.moviesRv.adapter = adapter
-        else {
-            sectionAdapter.removeAllSections()
-            val filteredMovies = viewModel.getFilteredMovies(s, adapter.getOriginalMoviesList())
-            filteredMovies.forEach { sectionAdapter.addSection(MovieSection(it,this)) }
-            binding.moviesRv.adapter = sectionAdapter
+            binding.tvEmpty.visibility = View.GONE
         }
+        else {
+            handleMoviesFiltration(searchQuery)
+        }
+    }
 
+    private fun handleMoviesFiltration(searchQuery: String) {
+        sectionAdapter.removeAllSections()
+        val filteredMovies = viewModel.getFilteredMovies(searchQuery, adapter.getOriginalMoviesList())
+        if(filteredMovies.isEmpty() )
+            binding.tvEmpty.visibility = View.VISIBLE
+        else
+            binding.tvEmpty.visibility = View.GONE
+        filteredMovies.forEach { sectionAdapter.addSection(MovieSection(it,this)) }
+        binding.moviesRv.adapter = sectionAdapter
     }
 }

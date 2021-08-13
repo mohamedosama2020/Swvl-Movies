@@ -11,4 +11,5 @@
     <string name="movies">Movies</string>
     <string name="rating">Rating: </string>
     <string name="year">Year: </string>
+    <string name="no_movies_matches_your_search">No Movies Matches Your Search</string>
 </resources>
